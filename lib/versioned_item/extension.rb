@@ -26,8 +26,9 @@ module VersionedItem
 
     # 1.1 => V1_1
     # v1.1 => V1_1
+    # v2.5.alpha6 => V2_5_alpha6
     def version_to_namespace(version)
-      version.to_s.tr('.', '_').upcase.tap do |v|
+      version.tr('.', '_').capitalize.tap do |v|
         v.prepend('V') unless v[0] == 'V'
       end
     end
