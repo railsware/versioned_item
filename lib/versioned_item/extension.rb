@@ -17,8 +17,8 @@ module VersionedItem
 
       if class_map[class_name]
         class_map[class_name]
-      elsif Object.const_defined? class_name
-        class_map[class_name] = Object.const_get class_name
+      elsif const_defined? class_name
+        class_map[class_name] = Object.const_get class_name, false
       else
         class_map[class_name] = resolve_class(prev_version(version))
       end
@@ -31,6 +31,13 @@ module VersionedItem
       version.tr('.', '_').capitalize.tap do |v|
         v.prepend('V') unless v[0] == 'V'
       end
+    end
+
+    def const_defined?(name)
+      Object.const_get(name, false)
+      true
+    rescue NameError
+      false
     end
 
     def prev_version(version)
