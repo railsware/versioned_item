@@ -1,12 +1,12 @@
 require 'spec_helper'
 
 module VersionedItem
-  RSpec.describe Item do
+  RSpec.describe Extension do
     subject { Dummy[version] }
     let(:version) { 1 }
 
     before do
-      stub_const('Dummy', Class.new { extend Item })
+      stub_const('Dummy', Class.new { extend Extension })
     end
 
     context 'no available versions set' do
@@ -17,13 +17,6 @@ module VersionedItem
 
     context 'available versions set' do
       before { VersionedItem.available_versions = available_versions }
-
-      context 'availabla versions are type casted' do
-        subject { VersionedItem.available_versions }
-        let(:available_versions) { [1, 2.1, '3'] }
-
-        it { is_expected.to eq ['1', '2.1', '3'] }
-      end
 
       context 'requested version is not available' do
         let(:available_versions) { [1] }
@@ -81,7 +74,7 @@ module VersionedItem
           let(:version) { 3 }
 
           before do
-            stub_const('Dummy2', Class.new { extend Item })
+            stub_const('Dummy2', Class.new { extend Extension })
           end
 
           it 'raises ItemNotFound' do

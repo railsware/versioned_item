@@ -1,5 +1,5 @@
 module VersionedItem
-  module Item
+  module Extension
     extend self
 
     def [](version)

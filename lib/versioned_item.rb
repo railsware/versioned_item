@@ -1,5 +1,5 @@
 require "versioned_item/version"
-require 'versioned_item/item'
+require 'versioned_item/extension'
 
 module VersionedItem
   class VersionsNotConfigured < StandardError; end

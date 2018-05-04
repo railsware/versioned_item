@@ -1,9 +1,11 @@
 RSpec.describe VersionedItem do
-  it "has a version number" do
-    expect(VersionedItem::VERSION).not_to be nil
-  end
+  describe '.available_versions=' do
+    context 'type castes arguments to strings' do
+      subject { described_class.available_versions }
+      
+      before { described_class.available_versions = [1, 2.1, '3']  }
 
-  it "does something useful" do
-    expect(false).to eq(true)
+      it { is_expected.to eq ['1', '2.1', '3'] }
+    end
   end
 end
